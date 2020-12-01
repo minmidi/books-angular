@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+mat-sidenav-container {
+  height: 100%;
+  background: url(https://www.ucan.vn/upload/userfiles/organizations/1/1/img/Racer/white5.jpg);
+  background-size: cover;
+}
+
+mat-sidenav-content {
+  padding: 20px;
+}
+

@@ -1,0 +1,11 @@
+  <app-header *ngIf = "authservice.currentUser" (toggleSideBarForMe)="sideBarToggler()"></app-header>
+  <mat-sidenav-container *ngIf = "authservice.currentUser">
+    <mat-sidenav mode="side"  [opened]="sideBarOpen">
+          <app-sidebar></app-sidebar>
+      </mat-sidenav>
+      <mat-sidenav-content>
+          <router-outlet></router-outlet>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+  <app-footer *ngIf = "authservice.currentUser"></app-footer>
+

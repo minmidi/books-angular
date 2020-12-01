@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center p4">
+    <div class="col-md-6">
+      <form (ngSubmit)="register()">
+        <h3>Đăng Nhập</h3>
+        <div class="form-group p-2">
+          <label for="my-input">Nhập Email</label>
+          <input type="email" name="email" class="form-control" [(ngModel)]="email" placeholder="Nhập email" required>
+        </div>
+
+        <div class="form-group p-2">
+          <label for="my-input">Nhập mật khẩu</label>
+          <input type="password" name="password" class="form-control" [(ngModel)]="password" placeholder="Enter Password" required>
+        </div>
+
+        <div class="form-group p-2">
+          <button type="submit" class="btn btn-primary">Đăng ký</button>
+          <div class="register">
+            <a href="#" routerLink="/login">Trở lại đăng nhập?</a>
+          </div>
+        </div>
+      </form>
+      <div class="form-group">
+        <p *ngIf="errorMessage.length > 0" class="text-danger">
+          {{ errorMessage }}
+        </p>
+        <p *ngIf="error.massage.length > 0" class="text-danger">
+            {{ error.massage }}
+        </p>
+        <p *ngIf="massage.length > 0" class="text-info">
+          {{ massage }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

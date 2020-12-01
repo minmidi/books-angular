@@ -1,0 +1,61 @@
+  <div class="limiter">
+  <div class="container-login100" style="background-image: url(https://i.imgur.com/81RTZEw.png);">
+    <div class="wrap-login100">
+      <div class="login100-form-title" style="background-image: url(https://image.freepik.com/free-photo/top-view-office-supplies-with-mouse-glasses_23-2148425936.jpg);  background-position: center;">
+        <span class="login100-form-title-1">
+          Đăng nhập
+        </span>
+      </div>
+
+      <div class="form-group m-3">
+        <p *ngIf="errorMessage.length > 0" class="alert alert-danger m-2 p-3" role="alert">
+          {{ errorMessage }}
+        </p>
+        <p *ngIf="error.massage.length > 0" class="alert alert-danger m-2 p-3" role="alert">
+            {{ error.massage }}
+        </p>
+      </div>
+
+      <form class="login100-form" (ngSubmit)="login()">
+        <div class="wrap-input100 m-b-26">
+          <span class="label-input100">Email</span>
+          <input class="input100" type="email" name="email" [(ngModel)]="email" placeholder="Nhập email" required>
+          <span class="focus-input100"></span>
+          <!-- @if($errors->has('email'))
+            {{$errors->first('email')}}
+          @endif -->
+        </div>
+
+        <div class="wrap-input100 m-b-18">
+          <span class="label-input100">Password</span>
+          <input class="input100" type="password" name="password"  [(ngModel)]="password" placeholder="Nhập mật khẩu" required>
+          <span class="focus-input100"></span>
+          <!-- @if($errors->has('password'))
+            {{$errors->first('password')}}
+          @endif -->
+        </div>
+
+        <div class="flex-sb-m w-full p-b-30">
+          <div class="contact100-form-checkbox">
+            <a href="#" routerLink="/register" class="txt1">
+              Tạo tài khoản mới
+            </a>
+          </div>
+
+          <div>
+            <a href="#" class="txt1">
+              Quên mật khẩu?
+            </a>
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button type="submit" class="login100-form-btn">
+            Đăng nhập
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
