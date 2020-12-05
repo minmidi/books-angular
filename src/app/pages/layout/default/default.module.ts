@@ -1,11 +1,18 @@
-import { CategoriesComponent } from './../../modules/categories/categories.component';
+import { environment } from './../../../../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {CategoriesService} from '../../../services/categories.service';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from './../../modules/dashboard/dashboard.component';
 import { BooksComponent } from './../../modules/books/books.component';
+import { CategoriesComponent } from './../../modules/categories/categories.component';
 import { SharedModule } from '../../shared/shared.module';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,6 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
+import { FormArrayName, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -32,6 +41,12 @@ import {MatCardModule} from '@angular/material/card';
     CommonModule,
     RouterModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    NgbModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatTableModule,
@@ -41,6 +56,7 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     MatDividerModule,
     MatCardModule,
-  ]
+  ],
+  providers: [CategoriesService]
 })
 export class DefaultModule { }

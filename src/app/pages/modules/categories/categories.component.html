@@ -7,7 +7,8 @@
           <button type="submit" class="btn btn-primary mr-2" style=" width: 44px; height: 40px">
           <mat-icon>search</mat-icon>
       </button>
-          <a href="" class="btn btn-success"> thêm mới</a>
+      <button class="btn btn-primary" (click)="open(content)">Thêm mới</button>
+
       </form>
 
       <mat-form-field>
@@ -27,31 +28,109 @@
 <table class="table" [style.fontSize]="fontSize.value">
   <thead>
       <tr>
-          <th scope="col">ID</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Mã danh mục</th>
+          <th scope="col">Tên danh mục</th>
+          <th scope="col">Ghi chú</th>
           <th scope="col">Sửa</th>
           <th scope="col">Xoá</th>
       </tr>
   </thead>
-  <tbody>
-      <tr *ngFor="let hero of heros">
-          <th scope="row">1</th>
-          <td>{{ hero.first}}</td>
-          <td>{{ hero.last}}</td>
-          <td>{{ hero.handle}}</td>
+  <tbody *ngFor="let item of category">
+      <tr *ngIf="!item.idedit; else elseBlock">
+          <td>{{ item.number}}</td>
+          <td>{{ item.name}}</td>
+          <td>{{ item.detail}}</td>
           <td>
-              <a href="#">
-                  <mat-icon>edit</mat-icon>
-              </a>
+            <button class="edit-cate" (click)="EditRecord(item)">
+              <mat-icon class="edit-cate-icon">edit</mat-icon>
+            </button>
           </td>
 
           <td>
-              <a href="#">
-                  <mat-icon>delete</mat-icon>
-              </a>
+            <button (click)="Deletecategory(item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
       </tr>
+
+      <ng-template #elseBlock>
+        <tr>
+          <td>
+            <input type="number" class="form-control" [(ngModel)]="item.editnumber">
+          </td>
+          <td>
+            <input type="text" class="form-control"  [(ngModel)]="item.editname">
+          </td>
+          <td>
+            <input type="text" class="form-control"  [(ngModel)]="item.editdetail">
+          </td>
+          <td>
+            <button (click)="Updaterecord(item)">
+              <mat-icon>check_circle</mat-icon>
+            </button>
+          </td>
+          <td>
+            <button (click)="item.idedit = false">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </td>
+      </tr>
+      </ng-template>
   </tbody>
 </table>
+
+
+<!--ADD FORM MODAL-->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">DANH MỤC</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="message">
+    {{ message }}
+  </div>
+  <div class="modal-body">
+    <form [FormGroup]="regForm" (ngSubmit)=onSubmit()>
+      <!--number category-->
+      <div class="form-group">
+        <label for="number">Mã số danh mục</label>
+        <div class="input-group">
+          <input type="number" class="form-control" [(ngModel)]="categoryNumber" placeholder="nhập mã số danh mục" name="number" id="number">
+        </div>
+      </div>
+      <!--end number category-->
+
+      <!--name category-->
+      <div class="form-group">
+        <label for="name">Tên danh mục</label>
+        <div class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="categoryName" placeholder="nhập tên danh mục" name="name" id="name">
+        </div>
+      </div>
+      <!--end name category-->
+
+      <!--detail category-->
+      <div class="form-group">
+        <label for="name">Ghi chú</label>
+        <div class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="categoryDetail" placeholder="nhập ghi chú" name="detail" id="detail">
+        </div>
+      </div>
+      <!--end detail category-->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="createRecord()" [disabled]="!categoryName || !categoryNumber || !categoryDetail">Thêm</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Xong</button>
+  </div>
+
+</ng-template>
+
+<!--END ADD FORM MODAL-->
+
+
+

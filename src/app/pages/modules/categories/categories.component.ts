@@ -1,6 +1,11 @@
 import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 import { Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {take} from 'rxjs/operators';
+import { FormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { CategoriesService } from './../../../services/categories.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 
 @Component({
@@ -9,29 +14,33 @@ import {take} from 'rxjs/operators';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  heros = [
-    {
-      id: 1,
-      first: 'Lê',
-      last: 'Trường',
-      handle: 'Giang',
-    },
-    {
-      id: 1,
-      first: 'Lê',
-      last: 'Thị',
-      handle: 'Hiền',
-    },
-    {
-      id: 1,
-      first: 'Lê',
-      last: 'Quỳnh',
-      handle: 'Trang',
-    }
-  ]
+
+  // CLOSE ADD FORM
+  closeResult: string | undefined;
+  // ALERTS
+  alerts: any;
+
+  // CRETE A CONTAINER VARIABLE
+  category: string | undefined;
+  categoryName: string | undefined;
+  categoryNumber: number | undefined;
+  categoryDetail: string | undefined;
+  message: string | undefined;
+
+  // VALIDATER FORM
+  regForm: FormGroup | undefined;
+  submitted = false;
+
 
   // tslint:disable-next-line: variable-name
-  constructor(private _ngZone: NgZone) { }
+  constructor(
+    // tslint:disable-next-line: variable-name
+    private _ngZone: NgZone,
+    public categoriessevice: CategoriesService,
+    private modalService: NgbModal,
+    public formbuilder: FormBuilder,
+    ) { }
+
   @ViewChild('autosize')
   autosize!: CdkTextareaAutosize;
 
@@ -43,6 +52,91 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // GET ALL CATEGORY
+    this.categoriessevice.getCategory().subscribe(data => {
+      this.category = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          idedit: false,
+          name: e.payload.doc.data()['name'],
+          number: e.payload.doc.data()['number'],
+          detail: e.payload.doc.data()['detail'],
+        };
+      });
+      console.log(this.category);
+    });
+
+    // VALIDATER 
   }
+
+  // MODAL
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  // END MODAL
+
+
+  // CREATE CATEGORY
+  // tslint:disable-next-line: typedef
+  createRecord() {
+    const Record = {};
+    Record['name'] = this.categoryName;
+    Record['number'] = this.categoryNumber;
+    Record['detail'] = this.categoryDetail;
+
+    console.log('Record: ', Record);
+
+    this.categoriessevice.createCategory(Record).then(res => {
+      this.categoryName = '';
+      this.categoryNumber = undefined;
+      this.categoryDetail = '';
+      console.log('res: ', res);
+      this.message = 'đã thêm thành công';
+    }).catch(error => {
+      console.log(error);
+    })
+  }
+
+
+  // GET RECORD
+  EditRecord(Record) {
+    Record.idedit = true;
+    Record.editname = Record.name;
+    Record.editnumber = Record.number;
+    Record.editdetail = Record.detail;
+  }
+
+  // UPDATE CATEGORY
+  Updaterecord(recorddata: { editname: any; editnumber: any; editdetail: any; idedit: any; id: any; }) {
+    const record = {};
+    record['name'] = recorddata.editname;
+    record['number'] = recorddata.editnumber;
+    record['detail'] = recorddata.editdetail;
+    this.categoriessevice.Updaterecord(recorddata.id, record);
+    recorddata.idedit = false;
+  }
+
+  // DELETE CATEGORY
+  // tslint:disable-next-line: typedef
+  Deletecategory( record_id: any, ) {
+    this.categoriessevice.DeleteRecord(record_id);
+  }
+
+  // VALIDATE
 
 }

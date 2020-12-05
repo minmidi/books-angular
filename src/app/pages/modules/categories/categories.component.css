@@ -1,0 +1,18 @@
+.message {
+  background-color: #D4EDDA;
+  margin: 20 20px 0 20px;
+  padding: 10px;
+}
+
+.edit-cate {
+  border: 0;
+  background: none;
+}
+
+.edit-cate-icon {
+  color: #2f4af7;
+}
+
+.edit-cate-icon:hover {
+  color: #0825da;
+}
