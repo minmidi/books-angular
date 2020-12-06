@@ -4,7 +4,7 @@
           <div class="form-group mr-2">
               <input type="text" class="form-control" name="search" placeholder="nhập tìm kiếm">
           </div>
-          <button type="submit" class="btn btn-primary mr-2" style=" width: 44px; height: 40px">
+          <button type="text" class="btn btn-primary mr-2" style=" width: 44px; height: 40px">
           <mat-icon>search</mat-icon>
       </button>
       <button class="btn btn-primary" (click)="open(content)">Thêm mới</button>
@@ -118,7 +118,7 @@
   </div>
 
   <div *ngIf="message">
-    <ngb-alert (closed)="close(alert)">{{ message }}</ngb-alert>
+    <ngb-alert type="success" (closed)="close(alert)">{{ message }}</ngb-alert>
   </div>
 
   <div class="modal-body">
@@ -188,6 +188,5 @@
 </ng-template>
 
 <!--END ADD FORM MODAL-->
-
 
 
