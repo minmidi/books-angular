@@ -4,6 +4,7 @@ import {take} from 'rxjs/operators';
 import { FormControl, FormsModule, FormBuilder, FormGroup, Validators, FormControlDirective} from '@angular/forms';
 import { CategoriesService } from './../../../services/categories.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 
 
@@ -26,6 +27,7 @@ export class CategoriesComponent implements OnInit {
   categoryNumber: number | undefined;
   categoryDetail: string | undefined;
   message: string | undefined;
+  firstname: any;
 
   // tslint:disable-next-line: variable-name
   constructor(
@@ -134,7 +136,31 @@ export class CategoriesComponent implements OnInit {
   // DELETE CATEGORY
   // tslint:disable-next-line: typedef
   Deletecategory( record_id: any, ) {
-    this.categoriessevice.DeleteRecord(record_id);
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn xóa danh mục?',
+      text: 'Nếu bạn thực hiện này dữ liệu sẽ mất và không thể phục hồi!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Tiếp tục!',
+      cancelButtonText: 'Thoát'
+    }).then((result) => {
+      if (result.value) {
+      this.categoriessevice.DeleteRecord(record_id);
+      Swal.fire(
+          'Đã xóa!',
+          'Danh mục đã được xóa khỏi danh sách.',
+          'success'
+        );
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cảnh báo',
+          'Không thể thực hiện xóa danh mục do lỗi',
+          'error'
+        );
+      }
+    });
   }
 
   // VALIDATE
