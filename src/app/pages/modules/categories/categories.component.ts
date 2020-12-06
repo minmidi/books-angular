@@ -1,7 +1,7 @@
 import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 import { Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {take} from 'rxjs/operators';
-import { FormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormsModule, FormBuilder, FormGroup, Validators, FormControlDirective} from '@angular/forms';
 import { CategoriesService } from './../../../services/categories.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
@@ -26,11 +26,6 @@ export class CategoriesComponent implements OnInit {
   categoryNumber: number | undefined;
   categoryDetail: string | undefined;
   message: string | undefined;
-
-  // VALIDATER FORM
-  regForm: FormGroup | undefined;
-  submitted = false;
-
 
   // tslint:disable-next-line: variable-name
   constructor(
@@ -65,8 +60,6 @@ export class CategoriesComponent implements OnInit {
       });
       console.log(this.category);
     });
-
-    // VALIDATER 
   }
 
   // MODAL
@@ -89,6 +82,13 @@ export class CategoriesComponent implements OnInit {
   }
 
   // END MODAL
+
+  // MESSAGE
+  // tslint:disable-next-line: typedef
+  close(alert: any) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
+  // END MESSAGE
 
 
   // CREATE CATEGORY
