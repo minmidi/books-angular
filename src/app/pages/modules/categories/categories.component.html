@@ -47,8 +47,8 @@
           </td>
 
           <td>
-            <button (click)="Deletecategory(item.id)">
-              <mat-icon>delete</mat-icon>
+            <button class="delete-cate" (click)="Deletecategory(item.id)">
+              <mat-icon class="delete-cate-icon">delete</mat-icon>
             </button>
           </td>
       </tr>
@@ -56,22 +56,49 @@
       <ng-template #elseBlock>
         <tr>
           <td>
-            <input type="number" class="form-control" [(ngModel)]="item.editnumber">
+            <input type="number" class="form-control" [(ngModel)]="item.editnumber" required pattern="[0-9]{4,10}" #number="ngModel">
+            <div *ngIf="number.invalid && (number.dirty || number.touched)"
+                class="alert alert-danger mt-2">
+              <div *ngIf="number.errors.required">
+                Mã danh mục không được để trống.
+              </div>
+              <div *ngIf="number.errors.pattern">
+                Mã danh mục có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
+              </div>
+            </div>
           </td>
           <td>
-            <input type="text" class="form-control"  [(ngModel)]="item.editname">
+            <input type="text" class="form-control"  [(ngModel)]="item.editname" required minlength="5" maxlength="50" #name="ngModel">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                class="alert alert-danger mt-2">
+              <div *ngIf="name.errors.required">
+                Tên danh mục không được để trống.
+              </div>
+              <div *ngIf="name.errors.minlength">
+                Tên danh mục phải lớn hơn 4 ký tự và lớn nhất là 50 ký tự.
+              </div>
+            </div>
           </td>
           <td>
-            <input type="text" class="form-control"  [(ngModel)]="item.editdetail">
+            <input type="text" class="form-control"  [(ngModel)]="item.editdetail" required minlength="5" maxlength="200" #detail="ngModel">
+            <div *ngIf="detail.invalid && (detail.dirty || detail.touched)"
+                class="alert alert-danger mt-2">
+              <div *ngIf="detail.errors.required">
+               Ghi chú không được để trống.
+              </div>
+              <div *ngIf="detail.errors.minlength">
+              Chi chú phải lớn hơn 5 ký tự và lớn nhất là 200 ký tự.
+              </div>
+            </div>
           </td>
           <td>
-            <button (click)="Updaterecord(item)">
-              <mat-icon>check_circle</mat-icon>
+            <button class="check-edit" (click)="Updaterecord(item)" [disabled]="!item.editnumber || !item.editname || !item.editdetail">
+              <mat-icon class="check-edit-icon">check_circle</mat-icon>
             </button>
           </td>
           <td>
-            <button (click)="item.idedit = false">
-              <mat-icon>cancel</mat-icon>
+            <button  class="cancel-edit" (click)="item.idedit = false">
+              <mat-icon class="cancel-edit-icon">cancel</mat-icon>
             </button>
           </td>
       </tr>
@@ -90,17 +117,29 @@
     </button>
   </div>
 
-  <div class="message">
-    {{ message }}
+  <div *ngIf="message">
+    <ngb-alert (closed)="close(alert)">{{ message }}</ngb-alert>
   </div>
+
   <div class="modal-body">
-    <form [FormGroup]="regForm" (ngSubmit)=onSubmit()>
+    <form>
       <!--number category-->
       <div class="form-group">
         <label for="number">Mã số danh mục</label>
         <div class="input-group">
-          <input type="number" class="form-control" [(ngModel)]="categoryNumber" placeholder="nhập mã số danh mục" name="number" id="number">
+          <input type="number" class="form-control" [(ngModel)]="categoryNumber" placeholder="nhập mã số danh mục" name="number" id="number" required pattern="[0-9]{4,10}" #number="ngModel">
         </div>
+
+        <div *ngIf="number.invalid && (number.dirty || number.touched)"
+            class="alert alert-danger mt-2">
+          <div *ngIf="number.errors.required">
+            Mã danh mục không được để trống.
+          </div>
+          <div *ngIf="number.errors.pattern">
+            Mã danh mục có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
+          </div>
+        </div>
+
       </div>
       <!--end number category-->
 
@@ -108,7 +147,16 @@
       <div class="form-group">
         <label for="name">Tên danh mục</label>
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="categoryName" placeholder="nhập tên danh mục" name="name" id="name">
+          <input type="text" class="form-control" [(ngModel)]="categoryName" placeholder="nhập tên danh mục" name="name" id="name"  required minlength="5" maxlength="50" #name="ngModel">
+        </div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="alert alert-danger mt-2">
+          <div *ngIf="name.errors.required">
+            Tên danh mục không được để trống.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Tên danh mục phải lớn hơn 4 ký tự và lớn nhất là 50 ký tự.
+          </div>
         </div>
       </div>
       <!--end name category-->
@@ -117,14 +165,23 @@
       <div class="form-group">
         <label for="name">Ghi chú</label>
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="categoryDetail" placeholder="nhập ghi chú" name="detail" id="detail">
+          <input type="text" class="form-control" [(ngModel)]="categoryDetail" placeholder="nhập ghi chú" name="detail" id="detail" required minlength="5" maxlength="200" #detail="ngModel">
+        </div>
+        <div *ngIf="detail.invalid && (detail.dirty || detail.touched)"
+            class="alert alert-danger mt-2">
+          <div *ngIf="detail.errors.required">
+           Ghi chú không được để trống.
+          </div>
+          <div *ngIf="detail.errors.minlength">
+           Ghi chú phải lớn hơn 5 ký tự và lớn nhất là 200 ký tự.
+          </div>
         </div>
       </div>
       <!--end detail category-->
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="createRecord()" [disabled]="!categoryName || !categoryNumber || !categoryDetail">Thêm</button>
+    <button type="button" class="btn btn-outline-dark" (click)="createRecord()" [disabled]="!categoryNumber || !categoryNumber || !categoryDetail">Thêm</button>
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Xong</button>
   </div>
 
