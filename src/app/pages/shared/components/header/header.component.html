@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-      <button mat-icon-button (click)="toggleSideBar()">
+      <button mat-icon-button (click)="toggleSideBar()" class="toggleSideBar">
           <mat-icon>
               menu
           </mat-icon>
@@ -11,22 +11,22 @@
       <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
           <ul fxLayout="row" fxLayoutGap="20px">
               <li>
-                  <button mat-icon-button>
+                  <button mat-icon-button class="settings">
                       <mat-icon>settings</mat-icon>
                   </button>
               </li>
 
               <li>
-                  <button mat-icon-button>
+                  <button mat-icon-button class="help_outline">
                       <mat-icon>help_outline</mat-icon>
                   </button>
               </li>
               <li>
-                  <button mat-button [matMenuTriggerFor]="menu">
+                  <button mat-button [matMenuTriggerFor]="menu" class="person_outline">
                   <mat-icon>person_outline</mat-icon>
                 </button>
                   <mat-menu #menu="matMenu">
-                      <button mat-menu-item (click)="authservice.singout()">
+                      <button mat-menu-item (click)="authservice.singout()" class="exit_to_app">
                     <mat-icon>exit_to_app</mat-icon>
                     Đăng xuất
                   </button>

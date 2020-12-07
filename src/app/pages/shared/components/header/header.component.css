@@ -1,3 +1,23 @@
 ul li {
   list-style: none;
 }
+
+.toggleSideBar:focus {
+  outline: none;
+}
+
+.help_outline:focus {
+  outline: none;
+}
+
+.settings:focus {
+  outline: none;
+}
+
+.person_outline:focus {
+  outline: none;
+}
+
+.exit_to_app:focus {
+  outline: none;
+}
