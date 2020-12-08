@@ -27,8 +27,9 @@
 <table class="table" [style.fontSize]="fontSize.value">
   <thead>
       <tr>
-          <th scope="col">Mã danh mục</th>
-          <th scope="col">Tên danh mục</th>
+          <th scope="col">Mã truyện</th>
+          <th scope="col">Tên truyện</th>
+          <th scope="col">Giá tiền</th>
           <th scope="col">Hình ảnh</th>
           <th scope="col">Tác giả</th>
           <th scope="col">Ghi chú</th>
@@ -40,6 +41,7 @@
       <tr *ngIf="!item.idedit; else elseBlock">
           <td>{{ item.number}}</td>
           <td>{{ item.name}}</td>
+          <td>{{ item.price + " " + "VNĐ"}}</td>
           <td>
             <img [src]="item.images" alt="" style="width: 150px; height: 200px;">
           </td>
@@ -65,10 +67,10 @@
             <div *ngIf="number.invalid && (number.dirty || number.touched)"
                 class="alert alert-danger mt-2">
               <div *ngIf="number.errors.required">
-                Mã danh mục không được để trống.
+               Mã số truyện không được để trống.
               </div>
               <div *ngIf="number.errors.pattern">
-                Mã danh mục có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
+               Mã số truyện có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
               </div>
             </div>
           </td>
@@ -77,10 +79,22 @@
             <div *ngIf="name.invalid && (name.dirty || name.touched)"
                 class="alert alert-danger mt-2">
               <div *ngIf="name.errors.required">
-                Tên danh mục không được để trống.
+                Tên truyện không được để trống.
               </div>
               <div *ngIf="name.errors.minlength">
-                Tên danh mục phải lớn hơn 4 ký tự và lớn nhất là 50 ký tự.
+                Tên truyện phải lớn hơn 4 ký tự và lớn nhất là 50 ký tự.
+              </div>
+            </div>
+          </td>
+          <td>
+            <input type="number" class="form-control" [(ngModel)]="item.editprice" required pattern="[0-9]{4,10}" #price="ngModel">
+            <div *ngIf="price.invalid && (price.dirty || price.touched)"
+                class="alert alert-danger mt-2">
+              <div *ngIf="price.errors.required">
+              Giá tiền không được để trống.
+              </div>
+              <div *ngIf="price.errors.pattern">
+              Giá tiền có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
               </div>
             </div>
           </td>
@@ -140,7 +154,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">DANH MỤC</h4>
+    <h4 class="modal-title" id="modal-basic-title">TRUYỆN NHẬT BẢN</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -152,49 +166,69 @@
 
   <div class="modal-body">
     <form>
-      <!--number category-->
+      <!--number-->
       <div class="form-group">
-        <label for="number">Mã số sách</label>
+        <label for="number">Mã số truyện</label>
         <div class="input-group">
-          <input type="number" class="form-control" [(ngModel)]="japaneseNumber" placeholder="nhập mã số sách" name="number" id="number" required pattern="[0-9]{4,10}" #number="ngModel">
+          <input type="number" class="form-control" [(ngModel)]="japaneseNumber" placeholder="Nhập mã số truyện" name="number" id="number" required pattern="[0-9]{4,10}" #number="ngModel">
         </div>
 
         <div *ngIf="number.invalid && (number.dirty || number.touched)"
             class="alert alert-danger mt-2">
           <div *ngIf="number.errors.required">
-            Mã danh mục không được để trống.
+            Mã số truyện không được để trống.
           </div>
           <div *ngIf="number.errors.pattern">
-            Mã danh mục có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
+            Mã số truyện có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
           </div>
         </div>
 
       </div>
-      <!--end number category-->
+      <!--end number-->
 
-      <!--name category-->
+      <!--name-->
       <div class="form-group">
-        <label for="name">Tên sách</label>
+        <label for="name">Tên truyện</label>
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="japaneseName" placeholder="nhập tên sách" name="name" id="name"  required minlength="5" maxlength="50" #name="ngModel">
+          <input type="text" class="form-control" [(ngModel)]="japaneseName" placeholder="Nhập tên truyện" name="name" id="name"  required minlength="5" maxlength="50" #name="ngModel">
         </div>
         <div *ngIf="name.invalid && (name.dirty || name.touched)"
             class="alert alert-danger mt-2">
           <div *ngIf="name.errors.required">
-            Tên danh mục không được để trống.
+            Tên truyện không được để trống.
           </div>
           <div *ngIf="name.errors.minlength">
-            Tên danh mục phải lớn hơn 4 ký tự và lớn nhất là 50 ký tự.
+            Tên truyện phải lớn hơn 4 ký tự và lớn nhất là 50 ký tự.
           </div>
         </div>
       </div>
-      <!--end name category-->
+      <!--end name-->
+
+      <!--price-->
+      <div class="form-group">
+        <label for="number">Giá tiền</label>
+        <div class="input-group">
+          <input type="number" class="form-control" [(ngModel)]="japanesePrice" placeholder="Nhập giá tiền" name="price" id="price" required pattern="[0-9]{4,10}" #price="ngModel">
+        </div>
+
+        <div *ngIf="price.invalid && (price.dirty || price.touched)"
+            class="alert alert-danger mt-2">
+          <div *ngIf="price.errors.required">
+            Mã số truyện không được để trống.
+          </div>
+          <div *ngIf="price.errors.pattern">
+            Mã số truyện có ít nhất 4 chữ số và lớn nhất là 10 chữ số.
+          </div>
+        </div>
+
+      </div>
+      <!--end price-->
 
       <!--Images Url-->
       <div class="form-group">
         <label for="name">Hình ảnh</label>
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="japaneseImageUrl" placeholder="nhập đường dẫn ảnh" name="images" id="images"  required minlength="5" maxlength="300"#images="ngModel">
+          <input type="text" class="form-control" [(ngModel)]="japaneseImageUrl" placeholder="Nhập đường dẫn ảnh" name="images" id="images"  required minlength="5" maxlength="300"#images="ngModel">
         </div>
         <div *ngIf="images.invalid && (images.dirty || images.touched)"
             class="alert alert-danger mt-2">
@@ -212,7 +246,7 @@
       <div class="form-group">
         <label for="name">Tác giả</label>
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="japaneseAthor" placeholder="nhập tác giả" name="name" id="name"  required minlength="5" maxlength="50" #name="ngModel">
+          <input type="text" class="form-control" [(ngModel)]="japaneseAthor" placeholder="Nhập tác giả" name="name" id="name"  required minlength="5" maxlength="50" #name="ngModel">
         </div>
         <div *ngIf="name.invalid && (name.dirty || name.touched)"
             class="alert alert-danger mt-2">
@@ -230,7 +264,7 @@
       <div class="form-group">
         <label for="name">Ghi chú</label>
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="japaneseDetail" placeholder="nhập ghi chú" name="detail" id="detail" required minlength="5" maxlength="200" #detail="ngModel">
+          <input type="text" class="form-control" [(ngModel)]="japaneseDetail" placeholder="Nhập ghi chú" name="detail" id="detail" required minlength="5" maxlength="200" #detail="ngModel">
         </div>
         <div *ngIf="detail.invalid && (detail.dirty || detail.touched)"
             class="alert alert-danger mt-2">

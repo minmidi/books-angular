@@ -1,21 +1,23 @@
-import { MatIconModule } from '@angular/material/icon';
-import { SouthtwoComponent } from './../../pages/southtwo/southtwo.component';
-import { SouthoneComponent } from './../../pages/southone/southone.component';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from './../../pages/home/home.component';
 import { MasterComponent } from './master.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PublicModule } from '../../public/public.module';
 
+import { HomeComponent } from './../../pages/home/home.component';
+import { SouthtwoComponent } from './../../pages/southtwo/southtwo.component';
+import { SouthoneComponent } from './../../pages/southone/southone.component';
+import { CloneComponent } from './../../pages/clone/clone.component';
 
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     MasterComponent,
     HomeComponent,
     SouthoneComponent,
-    SouthtwoComponent
+    SouthtwoComponent,
+    CloneComponent
   ],
   imports: [
     CommonModule,

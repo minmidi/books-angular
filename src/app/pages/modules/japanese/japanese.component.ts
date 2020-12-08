@@ -21,6 +21,7 @@ export class JapaneseComponent implements OnInit {
   japanese: string | undefined;
   japaneseName: string | undefined;
   japaneseNumber: number | undefined;
+  japanesePrice: number | undefined;
   japaneseDetail: string | undefined;
   japaneseAthor: string | undefined;
   japaneseImageUrl: string | undefined;
@@ -54,6 +55,7 @@ export class JapaneseComponent implements OnInit {
           idedit: false,
           name: e.payload.doc.data().name,
           number: e.payload.doc.data().number,
+          price: e.payload.doc.data().price,
           detail: e.payload.doc.data().detail,
           athor: e.payload.doc.data().athor,
           images: e.payload.doc.data().images,
@@ -99,6 +101,7 @@ export class JapaneseComponent implements OnInit {
     const Record = {};
     Record['name'] = this.japaneseName;
     Record['number'] = this.japaneseNumber;
+    Record['price'] = this.japanesePrice;
     Record['detail'] = this.japaneseDetail;
     Record['athor'] = this.japaneseAthor;
     Record['images'] = this.japaneseImageUrl;
@@ -108,6 +111,7 @@ export class JapaneseComponent implements OnInit {
     this.japaneseservice.createJapanese(Record).then((res: any) => {
       this.japaneseName = '';
       this.japaneseNumber = undefined;
+      this.japanesePrice = undefined;
       this.japaneseDetail = '';
       this.japaneseAthor = '';
       this.japaneseImageUrl = '';
@@ -123,16 +127,18 @@ export class JapaneseComponent implements OnInit {
     Record.idedit = true;
     Record.editname = Record.name;
     Record.editnumber = Record.number;
+    Record.editprice = Record.price;
     Record.editdetail = Record.detail;
     Record.editathor = Record.athor;
     Record.editimage = Record.images;
   }
 
    // UPDATE CATEGORY
-   Updaterecord(recorddata: { editname: any; editnumber: any; editdetail: any; editathor: any; editimage: any; idedit: any; id: any; }) {
+   Updaterecord(recorddata: { editname: any; editnumber: any; editprice: any; editdetail: any; editathor: any; editimage: any; idedit: any; id: any; }) {
     const record = {};
     record['name'] = recorddata.editname;
     record['number'] = recorddata.editnumber;
+    record['price'] = recorddata.editprice;
     record['detail'] = recorddata.editdetail;
     record['athor'] = recorddata.editathor;
     record['images'] = recorddata.editimage;
@@ -144,7 +150,7 @@ export class JapaneseComponent implements OnInit {
   // tslint:disable-next-line: typedef
   Deletecategory( record_id: any, ) {
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn xóa danh mục?',
+      title: 'Bạn có chắc chắn muốn xóa truyện?',
       text: 'Nếu bạn thực hiện này dữ liệu sẽ mất và không thể phục hồi!',
       icon: 'warning',
       showCancelButton: true,
@@ -155,7 +161,7 @@ export class JapaneseComponent implements OnInit {
       this.japaneseservice.DeleteRecord(record_id);
       Swal.fire(
           'Đã xóa!',
-          'Danh mục đã được xóa khỏi danh sách.',
+          'Truyện đã được xóa khỏi danh sách.',
           'success'
         );
       // For more information about handling dismissals please visit
@@ -163,7 +169,7 @@ export class JapaneseComponent implements OnInit {
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cảnh báo',
-          'Không thể thực hiện xóa danh mục do lỗi',
+          'Bạn đã thoát khỏi chức năng xóa truyện',
           'error'
         );
       }
