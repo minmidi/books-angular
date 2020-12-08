@@ -1,0 +1,26 @@
+<div class="containar"></div>
+<div class="container mt-5">
+  <!-- Portfolio Section Heading-->
+  <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Truyện Việt Nam</h2>
+  <!-- Icon Divider-->
+  <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><mat-icon class="stars">stars</mat-icon></div>
+      <div class="divider-custom-line"></div>
+  </div>
+  <!-- Portfolio Grid Items-->
+
+<div class="row mb-5">
+  <div class="col-sm-1 col-md-3 col-lg-3 mt-5" *ngFor="let item of vietnamese">
+    <div class="book-card text-center rounded">
+      <div class="product m-2">
+        <img class="mt-3" [src]="item.images" style="width: 280px; height: 400px;">
+        <h4 class="mt-2">{{ item.name }}</h4>
+        <p>{{ item.athor }}</p>
+        <p>{{ item.detail }}</p>
+      </div>
+  </div>
+  </div>
+</div>
+</div>
+

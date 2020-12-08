@@ -1,3 +1,4 @@
+import { MasterModule } from './dashboard/layout/master/master.module';
 import { DefaultModule } from './pages/layout/default/default.module';
 // Import form module
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +43,8 @@ import { RegisterComponent } from './pages/register/register.component';
     AngularFirestoreModule,
     // Import Default Module
     DefaultModule,
+    // Import Master Module
+    MasterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

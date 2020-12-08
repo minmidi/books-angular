@@ -86,7 +86,7 @@
             </div>
           </td>
           <td>
-            <input type="text" class="form-control"  [(ngModel)]="item.editimage" required minlength="5" maxlength="50" #images="ngModel">
+            <input type="text" class="form-control"  [(ngModel)]="item.editimage" required minlength="5" maxlength="300" #images="ngModel">
             <div *ngIf="images.invalid && (images.dirty || images.touched)"
                 class="alert alert-danger mt-2">
               <div *ngIf="images.errors.required">
@@ -219,7 +219,7 @@
       <div class="form-group">
         <label for="name">Hình ảnh</label>
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="vietnameseImageUrl" placeholder="nhập đường dẫn ảnh" name="images" id="images"  required minlength="5" maxlength="50" #images="ngModel">
+          <input type="text" class="form-control" [(ngModel)]="vietnameseImageUrl" placeholder="nhập đường dẫn ảnh" name="images" id="images"  required minlength="5" maxlength="300" #images="ngModel">
         </div>
         <div *ngIf="images.invalid && (images.dirty || images.touched)"
             class="alert alert-danger mt-2">
