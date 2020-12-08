@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VietnameseService } from '../../../services/vietnamese.service';
 import { JapaneseService } from '../../../services/japanese.service';
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,9 +11,9 @@ import { JapaneseService } from '../../../services/japanese.service';
 })
 export class HomeComponent implements OnInit {
 
-    // CRETE A CONTAINER VARIABLE
- vietnamese: string | undefined;
- japanese: string | undefined;
+  // CRETE A CONTAINER VARIABLE
+  vietnamese: string | undefined;
+  japanese: string | undefined;
 
   constructor(
     public  vietnameseservice: VietnameseService,

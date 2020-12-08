@@ -1,3 +1,4 @@
+import { CloneComponent } from './dashboard/pages/clone/clone.component';
 import { SouthtwoComponent } from './dashboard/pages/southtwo/southtwo.component';
 import { SouthoneComponent } from './dashboard/pages/southone/southone.component';
 import { HomeComponent } from './dashboard/pages/home/home.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: '', component: MasterComponent, children: [
     {path: '', component: HomeComponent},
     {path: 'vietnam', component: SouthoneComponent},
-    {path: 'japan', component: SouthtwoComponent}
+    {path: 'japan', component: SouthtwoComponent},
+    {path: 'book', component: CloneComponent},
   ]},
   // Redirect to login when you want to access the admin page
   // { path: '', redirectTo: '/login', pathMatch: 'full'},

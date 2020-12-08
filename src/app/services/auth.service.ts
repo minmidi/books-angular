@@ -46,12 +46,12 @@ export class AuthService {
   // tslint:disable-next-line: typedef
   registerWithEmail(email: string, password: string)
   {
-    this.afu.createUserWithEmailAndPassword(email,password).then((user)=>{
+     return this.afu.createUserWithEmailAndPassword(email, password).then((user) => {
       this.authState = user;
     }).catch(error => {
       console.log(error);
       throw error;
-    })
+    });
   }
 
   // tslint:disable-next-line: typedef

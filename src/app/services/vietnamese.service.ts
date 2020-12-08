@@ -30,4 +30,5 @@ export class VietnameseService {
   DeleteRecord(record_id: string | undefined) {
     this.fireservice.doc('vietnamese/' + record_id).delete();
   }
+
 }

@@ -17,13 +17,13 @@ import { MatIconModule } from '@angular/material/icon';
     HomeComponent,
     SouthoneComponent,
     SouthtwoComponent,
-    CloneComponent
+    CloneComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     PublicModule,
-    MatIconModule
+    MatIconModule,
   ]
 })
 export class MasterModule { }
