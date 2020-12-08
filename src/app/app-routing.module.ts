@@ -1,5 +1,6 @@
+import { VietnameseComponent } from './pages/modules/vietnamese/vietnamese.component';
+import { JapaneseComponent } from './pages/modules/japanese/japanese.component';
 import { CategoriesComponent } from './pages/modules/categories/categories.component';
-import { BooksComponent } from './pages/modules/books/books.component';
 import { DashboardComponent } from './pages/modules/dashboard/dashboard.component';
 
 
@@ -16,7 +17,7 @@ import { DefaultComponent } from './pages/layout/default/default.component';
 
 const routes: Routes = [
   // Redirect to login when you want to access the admin page
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  // { path: '', redirectTo: '/login', pathMatch: 'full'},
   // Path Login
   {path: 'login', component: LoginComponent},
   // Path register
@@ -24,8 +25,9 @@ const routes: Routes = [
   // Path admin
   {path: 'admin', component: DefaultComponent, children: [
       {path: '', component: DashboardComponent},
-      {path: 'books', component: BooksComponent},
-      {path: 'categories', component: CategoriesComponent}
+      {path: 'categories', component: CategoriesComponent},
+      {path: 'japanese', component: JapaneseComponent},
+      {path: 'vietnamese', component: VietnameseComponent},
   ]},
 ];
 

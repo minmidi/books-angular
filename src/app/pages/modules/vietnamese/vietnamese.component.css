@@ -1,0 +1,76 @@
+.edit-cate {
+  border: 0;
+  background: none;
+}
+
+.edit-cate:focus {
+  outline: none;
+}
+
+
+.edit-cate-icon {
+  color: #2f4af7;
+}
+
+.edit-cate-icon:hover {
+  color: #0825da;
+}
+
+.delete-cate {
+  border: 0;
+  background: none;
+}
+
+.delete-cate:focus {
+  outline: none;
+}
+
+.delete-cate-icon {
+  color: #f6220e;
+}
+
+.delete-cate-icon:hover {
+  color: #b91607;
+}
+
+.check-edit {
+  border: 0;
+  background: none;
+}
+
+.check-edit:focus {
+  outline: none;
+}
+
+.check-edit-icon {
+  color: #51ff33;
+}
+
+.check-edit-icon:hover {
+  color: #26ff00;
+}
+
+.cancel-edit {
+  border: 0;
+  background: none;
+}
+
+.cancel-edit:focus {
+  outline: none;
+}
+
+.cancel-edit-icon {
+  color: #fc3623;
+}
+
+.cancel-edit-icon:hover {
+  color: #ff2b17;
+}
+
+
+
+
+
+
+
+
