@@ -1,3 +1,7 @@
+import { VietnameseService } from './../../../services/vietnamese.service';
+import { JapaneseService } from './../../../services/japanese.service';
+import { VietnameseComponent } from './../../modules/vietnamese/vietnamese.component';
+import { JapaneseComponent } from './../../modules/japanese/japanese.component';
 import { environment } from './../../../../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -11,7 +15,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from './../../modules/dashboard/dashboard.component';
-import { BooksComponent } from './../../modules/books/books.component';
 import { CategoriesComponent } from './../../modules/categories/categories.component';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -34,8 +37,9 @@ import { FormArrayName, FormBuilder, FormsModule, ReactiveFormsModule } from '@a
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    BooksComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    JapaneseComponent,
+    VietnameseComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +61,6 @@ import { FormArrayName, FormBuilder, FormsModule, ReactiveFormsModule } from '@a
     MatDividerModule,
     MatCardModule,
   ],
-  providers: [CategoriesService]
+  providers: [CategoriesService, JapaneseService, VietnameseService]
 })
 export class DefaultModule { }
